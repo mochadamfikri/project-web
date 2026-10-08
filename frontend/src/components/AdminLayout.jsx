@@ -1,13 +1,16 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, Smartphone, LogOut, Store, Menu } from "lucide-react";
+import { LayoutDashboard, Smartphone, LogOut, Store, Menu, ShoppingCart, Settings } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useAuth as useAuthHook } from "@/lib/auth";
 
-const NAV = [
+const NAV_ALL = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true, testId: "nav-dashboard" },
   { to: "/admin/inventaris", label: "Inventaris HP", icon: Smartphone, testId: "nav-inventaris" },
+  { to: "/admin/pesanan", label: "Pesanan", icon: ShoppingCart, testId: "nav-pesanan" },
+  { to: "/admin/pengaturan", label: "Pengaturan", icon: Settings, testId: "nav-pengaturan", roles: ["owner", "admin"] },
 ];
 
 export default function AdminLayout() {
@@ -59,7 +62,7 @@ export default function AdminLayout() {
           open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}>
           <nav className="space-y-1">
-            {NAV.map((n) => (
+            {NAV_ALL.filter((n) => !n.roles || n.roles.includes(user?.role)).map((n) => (
               <NavLink
                 key={n.to} to={n.to} end={n.end}
                 data-testid={n.testId}

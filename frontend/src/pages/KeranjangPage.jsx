@@ -104,12 +104,14 @@ export default function KeranjangPage() {
               <span>Perkiraan Total</span>
               <span className="font-mono-tabular">{formatRupiah(cart.subtotal)}</span>
             </div>
-            <Button className="w-full mt-4 bg-[#0052FF] hover:bg-[#0040CC]" disabled data-testid="btn-checkout">
-              Checkout (Fase 3)
-            </Button>
+            <Link to="/checkout" className="block">
+              <Button className="w-full mt-4 bg-[#0052FF] hover:bg-[#0040CC]" data-testid="btn-checkout" disabled={cart.items.length === 0}>
+                Lanjut ke Checkout
+              </Button>
+            </Link>
             <p className="text-[11px] text-slate-500 mt-3 inline-flex items-start gap-1">
               <ShieldCheck className="w-3 h-3 mt-0.5" />
-              Checkout dan pembayaran akan tersedia pada Fase 3.
+              Stok akan di-reserve selama 30 menit setelah checkout.
             </p>
           </Card>
         </div>

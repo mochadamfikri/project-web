@@ -55,9 +55,14 @@ export default function StoreLayout() {
               </Button>
             </Link>
             {isCustomer && (
-              <Link to="/akun" className="hidden md:inline-flex" data-testid="link-akun">
-                <Button variant="ghost" size="sm"><UserCircle2 className="w-4 h-4 mr-1.5" />Akun</Button>
-              </Link>
+              <>
+                <Link to="/pesanan" className="hidden md:inline-flex" data-testid="link-pesanan">
+                  <Button variant="ghost" size="sm">Pesanan</Button>
+                </Link>
+                <Link to="/akun" className="hidden md:inline-flex" data-testid="link-akun">
+                  <Button variant="ghost" size="sm"><UserCircle2 className="w-4 h-4 mr-1.5" />Akun</Button>
+                </Link>
+              </>
             )}
             {isStaff && (
               <Link to="/admin" className="hidden md:inline-flex" data-testid="link-admin">
@@ -89,7 +94,12 @@ export default function StoreLayout() {
               ))}
               {user ? (
                 <>
-                  {isCustomer && <Link to="/akun" onClick={() => setOpen(false)} className="px-3 py-2 text-sm text-slate-600">Akun Saya</Link>}
+                  {isCustomer && (
+                    <>
+                      <Link to="/pesanan" onClick={() => setOpen(false)} className="px-3 py-2 text-sm text-slate-600">Pesanan Saya</Link>
+                      <Link to="/akun" onClick={() => setOpen(false)} className="px-3 py-2 text-sm text-slate-600">Akun Saya</Link>
+                    </>
+                  )}
                   {isStaff && <Link to="/admin" onClick={() => setOpen(false)} className="px-3 py-2 text-sm text-slate-600">Panel Admin</Link>}
                   <button onClick={() => { setOpen(false); doLogout(); }} className="text-left px-3 py-2 text-sm text-rose-600">Keluar</button>
                 </>
