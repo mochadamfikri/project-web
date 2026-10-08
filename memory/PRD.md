@@ -41,6 +41,19 @@ Website full-stack toko smartphone Indonesia. Dua bagian: (A) Panel Admin intern
 
 Hasil testing: iteration_1 → 17/17, iteration_2 → 20/20, iteration_3 → 14/14 (+1 bug fix), iteration_4 → 100% full flow e2e.
 
+### Fase 4 (08/OKTOBER/2026) ✅
+- **Laporan Keuangan** `/admin/laporan` dengan 6 KPI cards (Omzet, HPP, Laba Kotor, Pengeluaran, Laba Bersih dengan tag PROFIT/LOSS, Unit Terjual)
+- **Grafik Pergerakan Keuangan** (AreaChart harian: Omzet, Laba Kotor, Pengeluaran, Laba Bersih)
+- **Grafik Tingkat Penjualan** (ComposedChart: Bar unit terjual + Bar pesanan + Line omzet)
+- **Candle OHLC Mingguan** untuk omzet (hijau up, merah down, wick low-high)
+- **Rincian** per Top Produk, Pengeluaran per Kategori, dan Nilai Inventaris saat ini
+- **Filter rentang** cepat (Hari Ini / 7 / 30 / 90 Hari / 1 Tahun) + rentang kustom
+- **Export CSV** (Keuangan harian, Penjualan per pesanan, Pengeluaran)
+- **Pengeluaran Operasional** `/admin/pengeluaran` CRUD dengan 8 kategori (SEWA, LISTRIK, INTERNET, GAJI, PEMASARAN, KEMASAN, LOGISTIK, LAINNYA) — otomatis mengurangi laba_bersih di laporan
+- HPP di-snapshot ke `order.items.modal` saat checkout (akurat untuk pesanan baru)
+
+Hasil testing iteration_5: Backend 21/21 pytest + UI 100% end-to-end PASS.
+
 ## Backlog & Prioritas
 ### P0 (Fase 2 - setelah user approve Fase 1)
 - Katalog publik otomatis dari unit berpublikasi TAYANG
