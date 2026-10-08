@@ -26,32 +26,20 @@ Website full-stack toko smartphone Indonesia. Dua bagian: (A) Panel Admin intern
 ## Yang Sudah Diimplementasikan
 
 ### Fase 1 (08/OKTOBER/2026) ✅
-- Login JWT (owner@tokohp.id / Admin@12345), seed otomatis saat startup
-- Role: owner, admin, staf, pelanggan (gating di backend `require_roles`)
-- Panel admin: sidebar + header responsif
-- Dashboard statistik (total unit, tersedia, hold, terjual, servis, arsip, nilai modal/jual stok, estimasi laba, performa merek)
-- CRUD inventaris HP per unit (30+ field)
-- Validasi IMEI (14-17 digit, Luhn 15 digit, cek duplikat di DB)
-- Scan IMEI: manual + kamera (BarcodeDetector API) + scanner eksternal
-- Upload foto/video dengan validasi tipe & ukuran
-- Perhitungan keuangan backend (total_modal, estimasi_laba_kotor)
-- Status stok + publikasi dengan audit log
-- Role staf tidak dapat melihat harga_beli, biaya, supplier
-- Format tanggal DD/BULAN/YYYY + Rupiah "Rp 1.500.000"
+- Admin login JWT (owner@tokohp.id/Admin@12345), roles, CRUD inventaris per unit, scan IMEI (manual+kamera+scanner), validasi Luhn, upload foto/video dengan storage adapter, estimasi profit backend, dashboard dasar, audit log.
 
 ### Fase 2 (08/OKTOBER/2026) ✅
-- Katalog publik `/api/catalog` (list/featured/brands/detail) tanpa auth, sembunyikan IMEI/modal/supplier
-- Storefront publik: Beranda, Katalog dengan filter+sort, Detail Produk dengan galeri
-- Registrasi pelanggan `/api/auth/register` + role=pelanggan, promo_consent opt-in (default UNCHECKED), saluran WhatsApp/Email/SMS, versi persetujuan tercatat
-- Login terpadu (`/masuk`) routing by role (pelanggan→/akun, staf→/admin)
-- Alamat pelanggan multiple (CRUD `/api/customer/addresses`), alamat pertama auto default
-- Preferensi promosi (switch toggle, cabut consent kapan saja dengan revoked_at tercatat)
-- Keranjang pelanggan server-side (`/api/customer` GET/POST/DELETE), snapshot info, idempotent add, prevent add DRAFT/non-TERSEDIA
-- Badge jumlah item di header toko
-- Checkout button disabled dengan label "Checkout (Fase 3)"
-- **Riwayat Harga/Status UI** di admin detail unit (dari field history_harga, history_status)
+- Katalog publik, registrasi pelanggan + alamat multiple + promo consent opt-in, keranjang server-side, riwayat harga/status UI di admin.
 
-Hasil testing: iteration_1 → 17/17 + fix static mount. iteration_2 → 20/20 backend + 100% frontend e2e.
+### Fase 3 (08/OKTOBER/2026) ✅
+- **WhatsApp Float**: Tombol melayang hijau pojok kanan bawah, nomor dari pengaturan toko
+- **Checkout**: `/checkout` dengan pilih alamat + metode pengiriman + metode pembayaran. Reservasi stok (unit → HOLD, hold_batas 30 menit). Create order dengan snapshot alamat/items/harga. Pencegahan double-sell via atomic update.
+- **Pembayaran**: Pelanggan upload bukti transfer (`POST /api/orders/{id}/bukti-bayar`). Admin verifikasi (terima → unit TERJUAL + status DIPROSES; tolak → unit TERSEDIA + status DIBATALKAN). Pelanggan dapat batalkan pesanan sebelum verifikasi (stok dilepas).
+- **Pengaturan Toko**: Panel admin `/admin/pengaturan` 3 tab (Identitas, Pembayaran, Pengiriman). Toggle metode on/off, config rekening bank, QR URL. 3 metode bayar (Transfer Manual aktif, QRIS fondasi, Kasera Pay fondasi disabled). 6 metode kirim.
+- **Pengiriman Manual**: Admin isi nomor resi + estimasi + status pengiriman (MENUNGGU/DIKEMAS/DIKIRIM/DITERIMA). Status DIKIRIM → status_pesanan DIKIRIM; DITERIMA → SELESAI.
+- **Status lifecycle**: MENUNGGU_BAYAR → MENUNGGU_VERIFIKASI → DIPROSES → DIKIRIM → SELESAI (atau DIBATALKAN).
+
+Hasil testing: iteration_1 → 17/17, iteration_2 → 20/20, iteration_3 → 14/14 (+1 bug fix), iteration_4 → 100% full flow e2e.
 
 ## Backlog & Prioritas
 ### P0 (Fase 2 - setelah user approve Fase 1)

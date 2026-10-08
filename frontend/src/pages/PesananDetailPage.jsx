@@ -99,7 +99,7 @@ export default function PesananDetailPage() {
           <h2 className="font-heading font-semibold mb-3">Bukti Pembayaran</h2>
           <img src={resolveUrl(order.bukti_bayar_url)} alt="Bukti transfer" className="max-w-sm rounded-md border" />
           <p className="text-xs text-slate-500 mt-2">Diunggah: {order.bukti_bayar_at ? formatTanggalID(order.bukti_bayar_at) : "-"}</p>
-          <p className="text-sm mt-2">Status: <Badge className="font-medium">{order.status_pembayaran.replace("_", " ")}</Badge></p>
+          <div className="text-sm mt-2 flex items-center gap-2">Status: <Badge className="font-medium">{order.status_pembayaran.replace("_", " ")}</Badge></div>
           {order.catatan_admin && <p className="text-sm text-slate-600 mt-2">Catatan admin: {order.catatan_admin}</p>}
         </Card>
       )}
