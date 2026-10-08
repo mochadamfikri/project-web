@@ -1,0 +1,147 @@
+{
+  "project_name": "Sistem Manajemen Toko HP & Toko Online",
+  "theme": {
+    "strategy": "hybrid_theme",
+    "admin_panel": {
+      "mode": "system",
+      "style": "Swiss & High-Contrast",
+      "vibe": "Functional, Clear, High-density grid",
+      "colors": {
+        "primary": "#0052FF",
+        "background": "#F8FAFC",
+        "surface": "#FFFFFF",
+        "text_primary": "#0F172A",
+        "text_secondary": "#64748B",
+        "border": "#E2E8F0"
+      }
+    },
+    "storefront": {
+      "mode": "light",
+      "style": "Modern E-commerce, Premium Tech",
+      "vibe": "Tactile, Clean, Approachable",
+      "colors": {
+        "primary": "#0F172A",
+        "accent": "#FF5722",
+        "background": "#FAFAFA",
+        "surface": "#FFFFFF",
+        "text_primary": "#1E293B",
+        "text_secondary": "#475569"
+      }
+    },
+    "status_colors": {
+      "TERSEDIA": "text-emerald-700 bg-emerald-100 border-emerald-200",
+      "HOLD": "text-amber-700 bg-amber-100 border-amber-200",
+      "TERJUAL": "text-slate-700 bg-slate-100 border-slate-200",
+      "SERVIS": "text-rose-700 bg-rose-100 border-rose-200",
+      "DIARSIPKAN": "text-zinc-600 bg-zinc-100 border-zinc-200"
+    }
+  },
+  "typography": {
+    "headings": {
+      "family": "Outfit, sans-serif",
+      "weights": ["400", "600", "700"],
+      "usage": "H1-H6, Marketing Banners, Section Titles"
+    },
+    "body": {
+      "family": "Plus Jakarta Sans, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Paragraphs, UI Text, Buttons"
+    },
+    "data_numbers": {
+      "family": "JetBrains Mono, monospace",
+      "weights": ["400", "500"],
+      "usage": "IMEI, Prices (Rp), Financial Data, Serial Numbers in Admin Panel"
+    },
+    "rules": [
+      "Avoid Inter, Roboto, and generic sans-serifs completely.",
+      "Use tracking-tight for all headings > 24px.",
+      "Never center-align paragraphs; prioritize left-alignment for readability.",
+      "Use uppercase with wide tracking (tracking-[0.2em]) for overlines and tiny labels."
+    ]
+  },
+  "visual_enhancers": {
+    "borders": "1px solid border-border. Inner borders on surfaces for crispness.",
+    "shadows": "Ambient layered shadows. Avoid flat drop-shadows. Use shadow-sm for cards, shadow-xl for modals.",
+    "radius": "rounded-xl for storefront cards, rounded-md for admin dashboard density.",
+    "textures": "Subtle noise on dark mode backgrounds or hero sections. No large generic purple gradients."
+  },
+  "grids_and_layouts": {
+    "admin_dashboard": "High-density grid (grid-cols-1 md:grid-cols-3 lg:grid-cols-4). Tight gaps (gap-4). Every pixel matters. Cardless data tables where possible to reduce box-in-box UI.",
+    "storefront": "Bento grid (grid-cols-1 md:grid-cols-12). Wide gaps (gap-8). Asymmetrical hero sections. Overlapping elements to create tension.",
+    "spacing_scale": "Use generous padding for containers (p-6, p-8). Mobile-first padding is critical (p-4 for small screens)."
+  },
+  "components_instructions": {
+    "path_convention": "/app/frontend/src/components/ui/ (Use .js extensions! Do NOT use .tsx)",
+    "buttons": "Real buttons only. No 'fake' text-only clickable spans. Storefront CTAs should have micro-interactions (hover:scale-[1.02] active:scale-[0.98]).",
+    "inputs": "Shadcn UI inputs. High contrast borders. Focus state must use ring-2 with primary brand color.",
+    "tables": "Shadcn UI table for Admin. Must be responsive with horizontal scroll on mobile.",
+    "modals": "Dialog for IMEI Camera Scan. Must overlay cleanly and provide 'Tutup' button clearly.",
+    "toast": "Use Sonner for notifications ('Berhasil disimpan', 'IMEI tidak valid').",
+    "status_badge": "Must use the exact status_colors defined above. Add subtle dot indicator inside the badge for visual pop.",
+    "date_format": "Must strictly follow DD/BULAN/YYYY (e.g., 09/OKTOBER/2026). BULAN must be uppercase Indonesian.",
+    "currency": "Format as 'Rp 1.500.000' (Indonesian locale format)."
+  },
+  "motion": {
+    "transitions": "Use specific properties: transition-colors duration-200, transition-transform. NEVER use 'transition-all'.",
+    "hover_states": "All interactive elements must change color or slightly elevate on hover.",
+    "entrance": "Staggered fade-in-up for catalog grids (framer-motion or simple CSS animations)."
+  },
+  "accessibility": {
+    "contrast": "Text must pass WCAG AA. Ensure labels are legible over inputs.",
+    "testing": "All interactive elements MUST have data-testid attributes (e.g., data-testid=\"btn-login\", data-testid=\"input-imei\").",
+    "mobile": "Tap targets minimum 44x44px. Camera scan button must be thumb-accessible at bottom of screen."
+  },
+  "image_urls": {
+    "products_premium": [
+      {
+        "url": "https://images.unsplash.com/photo-1777028773178-7c7e991646d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHw0fHxwcmVtaXVtJTIwc21hcnRwaG9uZSUyMGNsb3NlJTIwdXB8ZW58MHx8fHwxNzkxNDgyNjQ2fDA&ixlib=rb-4.1.0&q=85",
+        "category": "hero_product",
+        "description": "Green premium smartphone close-up for hero banners"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1758348844306-5a0ba556db03?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwc21hcnRwaG9uZSUyMGNsb3NlJTIwdXB8ZW58MHx8fHwxNzkxNDgyNjQ2fDA&ixlib=rb-4.1.0&q=85",
+        "category": "product_detail",
+        "description": "Orange smartphone camera array for feature highlights"
+      }
+    ],
+    "lifestyle_usage": [
+      {
+        "url": "https://images.unsplash.com/photo-1592890288564-76628a30a657?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjB1c2luZyUyMHNtYXJ0cGhvbmV8ZW58MHx8fHwxNzkxNDgyNjQ2fDA&ixlib=rb-4.1.0&q=85",
+        "category": "testimonial_or_banner",
+        "description": "Person holding black android smartphone"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjB1c2luZyUyMHNtYXJ0cGhvbmV8ZW58MHx8fHwxNzkxNDgyNjQ2fDA&ixlib=rb-4.1.0&q=85",
+        "category": "testimonial_or_banner",
+        "description": "Person holding white Android smartphone"
+      }
+    ],
+    "store_context": [
+      {
+        "url": "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwyfHxlbGVjdHJvbmljJTIwc3RvcmUlMjBpbnRlcmlvcnxlbnwwfHx8fDE3OTE0ODI2NDZ8MA&ixlib=rb-4.1.0&q=85",
+        "category": "storefront_background",
+        "description": "Modern white retail store for about us or background sections"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "You are building a full-stack Hybrid app (Admin + E-commerce). Do NOT mix the UI paradigms. Admin should be dense and functional, Storefront should be spacious and emotional.",
+    "ALL text, placeholders, and error messages MUST be in Bahasa Indonesia. Example: 'Masuk' instead of 'Login', 'Keranjang' instead of 'Cart'.",
+    "For the Admin Inventory table, ensure 'Pencarian IMEI' and 'Status' filters are easily accessible.",
+    "Implement the 'Scan Kamera' feature for IMEI input inside a modal dialog using a web camera library or basic HTML5 capture input for mobile.",
+    "Generate code in .js (JSX) format, NOT .tsx. Provide the proper component installation commands (npx shadcn-ui@latest add button, etc).",
+    "Do NOT add text-align: center to the root App class. Maintain left alignment by default for human reading flow.",
+    "Use data-testid on every clickable element and form input for testing purposes.",
+    "Luhn validation must be implemented on the client-side for IMEI inputs before submission.",
+    "No generic AI purple gradients. If you need gradients, use subtle monochromatic or brand-accent washes.",
+    "Ensure the UI layout is truly Mobile-First (Android), meaning touch targets must be large enough and complex tables must be scrollable."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not use generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) where appropriate (e.g., sticky headers).",
+    "You MUST NOT apply universal transition (e.g. transition: all). This breaks transforms.",
+    "NEVER use AI assistant Emoji characters (🤖🧠💭💡) for icons. Use lucide-react.",
+    "Missing image categories = use the provided images. NEVER use placeholders like via.placeholder.com."
+  ]
+}
