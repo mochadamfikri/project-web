@@ -23,25 +23,35 @@ Website full-stack toko smartphone Indonesia. Dua bagian: (A) Panel Admin intern
 4. Fase 4: Analitik + pengeluaran + garansi + servis + laporan
 5. Fase 5: Testing menyeluruh + persiapan produksi
 
-## Yang Sudah Diimplementasikan (08/OKTOBER/2026)
-### Fase 1 Lengkap
-- ✅ Login JWT (owner@tokohp.id / Admin@12345), seed otomatis saat startup
-- ✅ Role: owner, admin, staf (gating di backend `require_roles`)
-- ✅ Panel admin dengan sidebar + header responsif
-- ✅ Dashboard statistik (total unit, tersedia, hold, terjual, servis, arsip, nilai modal/jual stok, estimasi laba, performa merek)
-- ✅ CRUD inventaris HP (unit per IMEI) dengan 30+ field
-- ✅ Validasi IMEI (14-17 digit, Luhn untuk 15 digit, cek duplikat di DB)
-- ✅ Input IMEI: manual + scan kamera (BarcodeDetector API) + scanner eksternal (keyboard input)
-- ✅ Upload foto & video (multipart, validasi tipe & ukuran: 10MB image / 100MB video)
-- ✅ Perhitungan keuangan: total_modal, estimasi_laba_kotor (dihitung di backend)
-- ✅ Status stok: TERSEDIA, HOLD (dengan alasan), TERJUAL, SERVIS, DIARSIPKAN
-- ✅ Status publikasi: DRAFT, TAYANG, DISEMBUNYIKAN, DIARSIPKAN
-- ✅ Riwayat harga & status + audit log
-- ✅ Role staf tidak dapat melihat harga_beli, biaya, supplier (disembunyikan di backend)
-- ✅ Format tanggal DD/BULAN/YYYY (JavaScript + Python)
-- ✅ Format Rupiah "Rp 1.500.000"
-- ✅ Storefront landing (minimal, Fase 2 placeholder)
-- ✅ Audit log (`audit_logs` collection) untuk CREATE/UPDATE/ARCHIVE unit
+## Yang Sudah Diimplementasikan
+
+### Fase 1 (08/OKTOBER/2026) ✅
+- Login JWT (owner@tokohp.id / Admin@12345), seed otomatis saat startup
+- Role: owner, admin, staf, pelanggan (gating di backend `require_roles`)
+- Panel admin: sidebar + header responsif
+- Dashboard statistik (total unit, tersedia, hold, terjual, servis, arsip, nilai modal/jual stok, estimasi laba, performa merek)
+- CRUD inventaris HP per unit (30+ field)
+- Validasi IMEI (14-17 digit, Luhn 15 digit, cek duplikat di DB)
+- Scan IMEI: manual + kamera (BarcodeDetector API) + scanner eksternal
+- Upload foto/video dengan validasi tipe & ukuran
+- Perhitungan keuangan backend (total_modal, estimasi_laba_kotor)
+- Status stok + publikasi dengan audit log
+- Role staf tidak dapat melihat harga_beli, biaya, supplier
+- Format tanggal DD/BULAN/YYYY + Rupiah "Rp 1.500.000"
+
+### Fase 2 (08/OKTOBER/2026) ✅
+- Katalog publik `/api/catalog` (list/featured/brands/detail) tanpa auth, sembunyikan IMEI/modal/supplier
+- Storefront publik: Beranda, Katalog dengan filter+sort, Detail Produk dengan galeri
+- Registrasi pelanggan `/api/auth/register` + role=pelanggan, promo_consent opt-in (default UNCHECKED), saluran WhatsApp/Email/SMS, versi persetujuan tercatat
+- Login terpadu (`/masuk`) routing by role (pelanggan→/akun, staf→/admin)
+- Alamat pelanggan multiple (CRUD `/api/customer/addresses`), alamat pertama auto default
+- Preferensi promosi (switch toggle, cabut consent kapan saja dengan revoked_at tercatat)
+- Keranjang pelanggan server-side (`/api/customer` GET/POST/DELETE), snapshot info, idempotent add, prevent add DRAFT/non-TERSEDIA
+- Badge jumlah item di header toko
+- Checkout button disabled dengan label "Checkout (Fase 3)"
+- **Riwayat Harga/Status UI** di admin detail unit (dari field history_harga, history_status)
+
+Hasil testing: iteration_1 → 17/17 + fix static mount. iteration_2 → 20/20 backend + 100% frontend e2e.
 
 ## Backlog & Prioritas
 ### P0 (Fase 2 - setelah user approve Fase 1)
