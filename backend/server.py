@@ -35,10 +35,10 @@ app.add_middleware(
     CORSMiddleware, allow_methods=["*"], allow_headers=["*"], **cors_kwargs,
 )
 
-# Static uploads (served under /api/uploads untuk ingress friendly)
+# Static uploads - mount pada sub-path agar tidak bentrok dengan POST /api/uploads/*
 upload_dir = os.environ.get("STORAGE_LOCAL_DIR", str(ROOT_DIR / "uploads"))
 Path(upload_dir).mkdir(parents=True, exist_ok=True)
-app.mount("/api/uploads", StaticFiles(directory=upload_dir), name="uploads")
+app.mount("/api/uploads/files", StaticFiles(directory=upload_dir), name="uploads")
 
 # Routers
 from routes_auth import router as auth_router

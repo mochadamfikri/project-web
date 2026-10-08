@@ -32,6 +32,6 @@ def get_storage() -> StorageBackend:
     if backend == "local":
         return LocalStorage(
             base_dir=os.environ["STORAGE_LOCAL_DIR"],
-            public_prefix=os.environ.get("PUBLIC_UPLOAD_PREFIX", "/api/uploads"),
+            public_prefix=os.environ.get("PUBLIC_UPLOAD_PREFIX", "/api/uploads/files"),
         )
     raise RuntimeError(f"Storage backend '{backend}' belum didukung")
