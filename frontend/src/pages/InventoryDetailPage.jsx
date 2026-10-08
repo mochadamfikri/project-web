@@ -101,6 +101,51 @@ export default function InventoryDetailPage() {
               <p className="text-sm text-slate-700 whitespace-pre-line">{data.deskripsi}</p>
             </Card>
           )}
+
+          {(data.history_harga?.length || data.history_status?.length) ? (
+            <Card className="p-5" data-testid="riwayat-section">
+              <h2 className="font-heading font-semibold mb-3">Riwayat Perubahan</h2>
+              <div className="grid md:grid-cols-2 gap-5">
+                <div>
+                  <h3 className="text-xs uppercase tracking-widest text-slate-500 mb-2">Harga Jual</h3>
+                  {(data.history_harga || []).length === 0 ? (
+                    <p className="text-sm text-slate-400">Belum ada perubahan.</p>
+                  ) : (
+                    <ul className="space-y-2 text-sm" data-testid="riwayat-harga">
+                      {(data.history_harga || []).slice().reverse().map((h, idx) => (
+                        <li key={idx} className="flex items-start justify-between gap-3 border-l-2 border-blue-200 pl-3">
+                          <div>
+                            <p className="font-mono-tabular font-medium">{formatRupiah(h.harga_jual)}</p>
+                            <p className="text-xs text-slate-500">oleh {h.oleh || "-"}</p>
+                          </div>
+                          <span className="text-xs text-slate-500 font-mono-tabular whitespace-nowrap">{formatTanggalID(h.at)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <div>
+                  <h3 className="text-xs uppercase tracking-widest text-slate-500 mb-2">Status Stok</h3>
+                  {(data.history_status || []).length === 0 ? (
+                    <p className="text-sm text-slate-400">Belum ada perubahan.</p>
+                  ) : (
+                    <ul className="space-y-2 text-sm" data-testid="riwayat-status">
+                      {(data.history_status || []).slice().reverse().map((h, idx) => (
+                        <li key={idx} className="flex items-start justify-between gap-3 border-l-2 border-amber-200 pl-3">
+                          <div>
+                            <StatusBadge status={h.status_stok} />
+                            {h.alasan && <p className="text-xs text-slate-500 mt-1">Alasan: {h.alasan}</p>}
+                            <p className="text-xs text-slate-500">oleh {h.oleh || "-"}</p>
+                          </div>
+                          <span className="text-xs text-slate-500 font-mono-tabular whitespace-nowrap">{formatTanggalID(h.at)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </Card>
+          ) : null}
         </div>
 
         <div className="space-y-5">

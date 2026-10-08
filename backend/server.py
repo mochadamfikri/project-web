@@ -45,11 +45,15 @@ from routes_auth import router as auth_router
 from routes_inventory import router as inventory_router
 from routes_uploads import router as uploads_router
 from routes_dashboard import router as dashboard_router
+from routes_catalog import router as catalog_router
+from routes_customer import router as customer_router
 
 app.include_router(auth_router)
 app.include_router(inventory_router)
 app.include_router(uploads_router)
 app.include_router(dashboard_router)
+app.include_router(catalog_router)
+app.include_router(customer_router)
 
 # Logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -82,6 +86,9 @@ async def on_startup():
     await db.units.create_index("status_stok")
     await db.units.create_index("status_publikasi")
     await db.audit_logs.create_index([("at", -1)])
+    await db.addresses.create_index("user_id")
+    await db.addresses.create_index("id", unique=True)
+    await db.carts.create_index("user_id", unique=True)
 
     owner_email = os.environ.get("OWNER_EMAIL", "owner@tokohp.id").lower()
     owner_password = os.environ.get("OWNER_PASSWORD", "Admin@12345")
