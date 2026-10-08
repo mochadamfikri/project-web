@@ -112,6 +112,7 @@ async def checkout(payload: CheckoutRequest, user=Depends(require_roles(ROLE_PEL
                 "varian": unit.get("varian", ""),
                 "warna": unit.get("warna", ""),
                 "harga_jual": float(unit.get("harga_jual") or 0),
+                "modal": float((unit.get("harga_beli") or 0) + (unit.get("biaya_reparasi") or 0) + (unit.get("biaya_tambahan") or 0)),
                 "foto_utama": (unit.get("foto_urls") or [None])[0],
             })
     except Exception as e:

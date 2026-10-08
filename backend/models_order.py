@@ -88,6 +88,7 @@ class OrderItemSnapshot(BaseModel):
     varian: Optional[str] = ""
     warna: Optional[str] = ""
     harga_jual: float
+    modal: float = 0  # snapshot total_modal (harga_beli+biaya_reparasi+biaya_tambahan) saat checkout
     foto_utama: Optional[str] = None
 
 

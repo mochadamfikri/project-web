@@ -49,6 +49,8 @@ from routes_catalog import router as catalog_router
 from routes_customer import router as customer_router
 from routes_settings import router as settings_router
 from routes_orders import router as orders_router
+from routes_reports import router as reports_router
+from routes_expenses import router as expenses_router
 
 app.include_router(auth_router)
 app.include_router(inventory_router)
@@ -58,6 +60,8 @@ app.include_router(catalog_router)
 app.include_router(customer_router)
 app.include_router(settings_router)
 app.include_router(orders_router)
+app.include_router(reports_router)
+app.include_router(expenses_router)
 
 # Logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -98,6 +102,8 @@ async def on_startup():
     await db.orders.create_index("user_id")
     await db.orders.create_index("status_pesanan")
     await db.settings.create_index("id", unique=True)
+    await db.expenses.create_index("id", unique=True)
+    await db.expenses.create_index("tanggal")
 
     owner_email = os.environ.get("OWNER_EMAIL", "owner@tokohp.id").lower()
     owner_password = os.environ.get("OWNER_PASSWORD", "Admin@12345")
