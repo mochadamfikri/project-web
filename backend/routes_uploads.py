@@ -1,7 +1,7 @@
 """Endpoint upload foto/video (staff only)."""
 from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
 
-from auth import require_roles, ROLE_OWNER, ROLE_ADMIN, ROLE_STAF
+from auth import require_roles, ROLE_OWNER, ROLE_ADMIN, ROLE_STAF, ROLE_PELANGGAN
 from storage_adapter import get_storage
 
 router = APIRouter(prefix="/api/uploads", tags=["uploads"])
@@ -14,7 +14,8 @@ MAX_VIDEO_SIZE = 100 * 1024 * 1024  # 100 MB
 
 @router.post("/image")
 async def upload_image(file: UploadFile = File(...),
-                       _user=Depends(require_roles(ROLE_OWNER, ROLE_ADMIN, ROLE_STAF))):
+                       _user=Depends(require_roles(ROLE_OWNER, ROLE_ADMIN, ROLE_STAF, ROLE_PELANGGAN))):
+    """Upload image: diizinkan untuk staf (foto produk) dan pelanggan (bukti bayar)."""
     if file.content_type not in ALLOWED_IMAGE:
         raise HTTPException(status_code=400, detail="Format gambar tidak didukung (JPEG/PNG/WEBP/GIF)")
     data = await file.read()

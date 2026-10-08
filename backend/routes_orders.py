@@ -314,7 +314,7 @@ async def update_resi(order_id: str, payload: UpdateResiRequest, user=Depends(re
     if doc.get("status_pesanan") not in ("DIPROSES", "DIKIRIM"):
         raise HTTPException(status_code=400, detail="Pesanan belum dibayar atau sudah selesai")
 
-    update = {k: v for k, v in payload.model_dump(exclude_unset=True).items() if v is not None}
+    update = {k: v for k, v in payload.model_dump(exclude_unset=True).items() if v is not None and v != ""}
     if "status_pengiriman" in update and update["status_pengiriman"] not in STATUS_PENGIRIMAN:
         raise HTTPException(status_code=400, detail="Status pengiriman tidak valid")
     if update.get("status_pengiriman") == "DIKIRIM":
